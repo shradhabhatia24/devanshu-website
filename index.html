@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Want to Meditate but Where Do I Begin? — Devanshu Dalmia</title>
+  <meta name="description" content="A clear framework from a fellow seeker. Devanshu Dalmia's debut book demystifies meditation for the curious, analytical mind.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #F9F3EB;
+      --cream-2:  #F2E8D8;
+      --orange:   #C96B10;
+      --orange-h: #A8560C;
+      --orange-lt:#FFF0DC;
+      --dark:     #1E1209;
+      --muted:    #6B4F35;
+      --border:   #E8D5BF;
+      --white:    #FFFFFF;
+      --radius:   6px;
+      --shadow:   0 4px 32px rgba(30,18,9,0.12);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: var(--orange); width: 0%; z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 900;
+      background: rgba(249,243,235,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.95rem; font-weight: 700; letter-spacing: 0.03em;
+      color: var(--dark); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-cta {
+      background: var(--orange); color: var(--white) !important;
+      padding: 8px 20px; border-radius: var(--radius);
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--orange-h) !important; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--dark); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu { display: none; background: var(--cream); border-bottom: 1px solid var(--border); }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; padding: 16px 32px 24px; display: flex; flex-direction: column; gap: 18px; }
+    .mobile-menu a { color: var(--dark); text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+
+    /* ── HERO (centered, James Clear style) ── */
+    .hero {
+      text-align: center;
+      padding: 72px 24px 80px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700; line-height: 1.2;
+      color: var(--dark); margin-bottom: 40px;
+    }
+    .hero-title em { font-style: italic; color: var(--orange); }
+
+    /* ── BOOK (real cover + 3D book effect) ── */
+    .hero-book-wrap {
+      display: flex; justify-content: center;
+      margin: 0 auto 40px;
+    }
+    .book-scene {
+      display: flex;
+      align-items: stretch;
+      transform: perspective(1000px) rotateY(-22deg);
+      filter: drop-shadow(28px 36px 56px rgba(30,18,9,0.38)) drop-shadow(0 8px 16px rgba(30,18,9,0.18));
+      transition: transform 0.5s ease, filter 0.5s ease;
+    }
+    .book-scene:hover {
+      transform: perspective(1000px) rotateY(-10deg);
+      filter: drop-shadow(16px 28px 44px rgba(30,18,9,0.28)) drop-shadow(0 6px 12px rgba(30,18,9,0.12));
+    }
+    /* Spine */
+    .book-spine-3d {
+      width: 28px;
+      flex-shrink: 0;
+      background: linear-gradient(to right, #5C2E04 0%, #92480A 55%, #C06010 100%);
+      border-radius: 3px 0 0 3px;
+      position: relative;
+    }
+    /* Pages highlight on spine top edge */
+    .book-spine-3d::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 3px 0 0 0;
+    }
+    /* Front face */
+    .book-front-face {
+      position: relative;
+    }
+    .book-front-face img {
+      display: block;
+      width: 242px;
+      border-radius: 0 4px 4px 0;
+    }
+    /* Subtle gloss sheen on cover */
+    .book-front-face::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(160deg, rgba(255,255,255,0.13) 0%, transparent 55%);
+      border-radius: 0 4px 4px 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    /* Page edges — bottom */
+    .book-pages-bottom {
+      position: absolute;
+      bottom: -9px;
+      left: 2px; right: 0;
+      height: 9px;
+      background: repeating-linear-gradient(
+        to right,
+        #F0E4D0 0px, #F0E4D0 1.5px,
+        #D8C8B0 1.5px, #D8C8B0 2px
+      );
+      border-radius: 0 0 3px 2px;
+      box-shadow: 0 4px 8px rgba(30,18,9,0.15);
+    }
+    /* Page edges — right side */
+    .book-pages-right {
+      position: absolute;
+      top: 2px; bottom: -9px;
+      right: -7px;
+      width: 7px;
+      background: repeating-linear-gradient(
+        to bottom,
+        #EDE2CE 0px, #EDE2CE 1.5px,
+        #D4C4A8 1.5px, #D4C4A8 2px
+      );
+      border-radius: 0 2px 2px 0;
+      box-shadow: 3px 0 6px rgba(30,18,9,0.10);
+    }
+
+    /* ── HERO BELOW-BOOK ── */
+    .hero-sub {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.1rem; color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .hero-desc {
+      font-size: 0.98rem; color: var(--muted);
+      max-width: 560px; margin: 0 auto 36px;
+      line-height: 1.8;
+    }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: var(--white);
+      padding: 13px 28px; border-radius: var(--radius);
+      font-weight: 600; font-size: 0.92rem; text-decoration: none;
+      transition: background 0.2s, transform 0.15s; letter-spacing: 0.01em;
+    }
+    .btn-primary:hover { background: var(--orange-h); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--orange);
+      padding: 13px 28px; border-radius: var(--radius);
+      border: 1.5px solid var(--orange);
+      font-weight: 600; font-size: 0.92rem; text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: var(--orange); color: var(--white); transform: translateY(-1px); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: 1080px; margin: 0 auto;
+      border: none; border-top: 1px solid var(--border);
+    }
+
+    /* ── HI I'M DEVANSHU (2-col, James Clear style) ── */
+    .intro-section {
+      max-width: 1080px; margin: 0 auto;
+      padding: 80px 32px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px;
+      align-items: start;
+    }
+    .intro-left h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.9rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 20px;
+    }
+    .intro-left p {
+      font-size: 0.97rem; color: var(--muted); line-height: 1.85;
+      margin-bottom: 16px;
+    }
+    .intro-left a {
+      color: var(--orange); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    }
+    .intro-left a:hover { text-decoration: underline; }
+    .intro-right h3 {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    }
+    .chapter-links { list-style: none; display: flex; flex-direction: column; gap: 0; }
+    .chapter-links li {
+      padding: 16px 0; border-bottom: 1px solid var(--border);
+    }
+    .chapter-links a {
+      text-decoration: none; color: var(--dark);
+      font-size: 0.9rem; line-height: 1.5;
+      transition: color 0.2s;
+    }
+    .chapter-links a:hover { color: var(--orange); }
+    .chapter-links .ch-num {
+      font-size: 0.7rem; color: var(--orange); font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; display: block;
+      margin-bottom: 2px;
+    }
+
+    /* ── SECTIONS ── */
+    .section { padding: 96px 32px; }
+    .section-alt { background: var(--cream-2); }
+    .container { max-width: 1080px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700;
+      line-height: 1.25; color: var(--dark); margin-bottom: 14px;
+    }
+    .section-intro {
+      font-size: 1rem; color: var(--muted); max-width: 600px; line-height: 1.8;
+    }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      background: var(--cream-2); border-left: 3px solid var(--orange);
+      padding: 32px 40px; margin: 64px auto;
+      max-width: 720px;
+    }
+    .pull-quote p {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.25rem; font-style: italic; color: var(--dark);
+      line-height: 1.65; margin-bottom: 14px;
+    }
+    .pull-quote cite { font-size: 0.82rem; color: var(--muted); font-style: normal; }
+
+    /* ── WHY READ (SVG icon cards) ── */
+    .why-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 28px; margin-top: 52px;
+    }
+    .why-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px 26px;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .why-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .why-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--orange-lt);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px;
+    }
+    .why-icon svg { width: 22px; height: 22px; }
+    .why-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--dark);
+    }
+    .why-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.78; }
+
+    /* ── CHAPTERS ── */
+    .chapters-header { margin-bottom: 48px; }
+    .chapter-list { display: flex; flex-direction: column; }
+    .chapter-item {
+      display: grid; grid-template-columns: 72px 1fr;
+      gap: 28px; padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .chapter-item:first-child { border-top: 1px solid var(--border); }
+    .chapter-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.8rem; font-weight: 700; color: var(--border);
+      line-height: 1; padding-top: 4px; user-select: none;
+    }
+    .chapter-item:hover .chapter-num { color: #DDBB99; }
+    .chapter-tag {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 6px;
+    }
+    .chapter-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.3rem; font-weight: 700; color: var(--dark);
+      margin-bottom: 10px; line-height: 1.3;
+    }
+    .chapter-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.82; max-width: 660px; }
+    .chapter-topics { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .topic-tag {
+      background: var(--cream-2); border: 1px solid var(--border);
+      color: var(--muted); font-size: 0.72rem; padding: 4px 12px;
+      border-radius: 100px; font-weight: 500;
+    }
+
+    /* ── AUTHOR ── */
+    .author-grid {
+      display: grid; grid-template-columns: 320px 1fr;
+      gap: 72px; align-items: start; margin-top: 52px;
+    }
+    .author-photo-wrap { position: relative; }
+    .author-photo {
+      width: 100%; border-radius: var(--radius); display: block;
+      object-fit: cover; aspect-ratio: 3/4;
+      box-shadow: 0 8px 40px rgba(30,18,9,0.14);
+    }
+    .author-photo-badge {
+      position: absolute; bottom: -14px; right: -14px;
+      background: var(--orange); color: var(--white);
+      padding: 12px 18px; border-radius: var(--radius);
+      font-size: 0.78rem; font-weight: 600; line-height: 1.45;
+      max-width: 190px; box-shadow: 0 4px 20px rgba(201,107,16,0.35);
+      font-style: italic;
+    }
+    .author-content { padding-top: 4px; }
+    .author-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.9rem; font-weight: 700; color: var(--dark); margin-bottom: 6px;
+    }
+    .author-role { font-size: 0.88rem; color: var(--orange); font-weight: 600; margin-bottom: 28px; }
+    .author-bio p { font-size: 0.97rem; color: var(--muted); line-height: 1.88; margin-bottom: 16px; }
+    .author-highlights { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 28px; }
+    .highlight-item { display: flex; align-items: center; gap: 10px; }
+    .highlight-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+    .highlight-text { font-size: 0.86rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 500px; gap: 80px; align-items: start; }
+    .contact-left .section-title { margin-bottom: 14px; }
+    .contact-left p { font-size: 0.97rem; color: var(--muted); line-height: 1.82; margin-bottom: 20px; }
+    .contact-detail { display: flex; align-items: center; gap: 12px; font-size: 0.88rem; color: var(--muted); margin-bottom: 10px; }
+    .contact-detail a { color: var(--orange); text-decoration: none; }
+    .contact-detail a:hover { text-decoration: underline; }
+    .form-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow); }
+    .form-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; font-weight: 700; color: var(--dark); margin-bottom: 28px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 11px 14px;
+      border: 1.5px solid var(--border); border-radius: var(--radius);
+      background: var(--cream); color: var(--dark); font-size: 0.93rem;
+      font-family: inherit; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--orange); box-shadow: 0 0 0 3px rgba(201,107,16,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-submit { width: 100%; padding: 13px; background: var(--orange); color: var(--white); border: none; border-radius: var(--radius); font-size: 0.93rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: background 0.2s, transform 0.15s; margin-top: 6px; }
+    .form-submit:hover { background: var(--orange-h); transform: translateY(-1px); }
+    .form-note { font-size: 0.76rem; color: var(--muted); margin-top: 10px; text-align: center; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--dark); color: rgba(255,255,255,0.55); padding: 44px 32px; }
+    .footer-inner { max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-logo { font-family: 'Playfair Display', Georgia, serif; color: rgba(255,255,255,0.9); font-size: 0.95rem; font-weight: 700; }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-copy { font-size: 0.78rem; }
+
+    /* ── ANIMATIONS ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .intro-section { grid-template-columns: 1fr; gap: 48px; }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .author-grid { grid-template-columns: 1fr; gap: 48px; }
+      .author-photo-wrap { max-width: 280px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .section { padding: 64px 20px; }
+      .hero { padding: 48px 20px 60px; }
+      .intro-section { padding: 56px 20px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .chapter-item { grid-template-columns: 52px 1fr; gap: 16px; }
+      .pull-quote { padding: 24px 24px; margin: 40px auto; }
+      .pull-quote p { font-size: 1.05rem; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+      .book-scene { transform: perspective(800px) rotateY(-14deg); }
+      .nav-inner { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Devanshu Dalmia</a>
+    <ul class="nav-links">
+      <li><a href="#why-read">Why Read</a></li>
+      <li><a href="#chapters">Chapters</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Get the Book</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <ul>
+      <li><a href="#why-read" class="mobile-link">Why Read</a></li>
+      <li><a href="#chapters" class="mobile-link">Chapters</a></li>
+      <li><a href="#about" class="mobile-link">About</a></li>
+      <li><a href="#contact" class="mobile-link">Get the Book</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <h1 class="hero-title reveal">
+    I Want to <em>Meditate</em><br>but Where Do I Begin?
+  </h1>
+
+  <!-- Book (real cover + 3D spine/pages) -->
+  <div class="hero-book-wrap reveal reveal-delay-1">
+    <div class="book-scene">
+      <div class="book-spine-3d"></div>
+      <div class="book-front-face">
+        <img src="book-front-cover.png" alt="I Want to Meditate but Where Do I Begin? — Devanshu Dalmia">
+        <div class="book-pages-bottom"></div>
+        <div class="book-pages-right"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hero-sub reveal reveal-delay-2">
+    <em>A Clear Framework from a Fellow Seeker</em>
+  </p>
+  <p class="hero-desc reveal reveal-delay-2">
+    Most people don't avoid meditation because they doubt its value.
+    They avoid it because they don't know where to begin. This book changes that.
+  </p>
+  <div class="hero-actions reveal reveal-delay-3">
+    <a href="#contact" class="btn-primary">Get the Book</a>
+    <a href="#chapters" class="btn-secondary">Explore the Chapters</a>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── HI I'M DEVANSHU (2-col, James Clear style) ── -->
+<div class="intro-section">
+  <div class="intro-left reveal">
+    <h2>Hi, I'm Devanshu Dalmia</h2>
+    <p>
+      I'm the author of <em>I Want to Meditate but Where Do I Begin?</em> — a debut book
+      that I wrote because I needed it and couldn't find it. It's the beginner's guide I wish
+      had existed when I first asked that question.
+    </p>
+    <p>
+      I came to meditation not as a monk or mystic, but as a strategy professional under
+      pressure — navigating demanding corporate roles, tight timelines, and the relentless
+      cognitive load of modern professional life. Meditation became my anchor, and eventually,
+      my secret to a calmer, more focused life.
+    </p>
+    <p>
+      <a href="#about">Learn more about me and my journey →</a>
+    </p>
+  </div>
+  <div class="intro-right reveal reveal-delay-1">
+    <h3>Inside the Book — Four Questions</h3>
+    <ul class="chapter-links">
+      <li>
+        <a href="#chapters">
+          <span class="ch-num">Chapter 01</span>
+          Why Should I Meditate? — Understanding the ultimate goal through quantum physics, the human body, and consciousness.
+        </a>
+      </li>
+      <li>
+        <a href="#chapters">
+          <span class="ch-num">Chapter 02</span>
+          What Benefits Will Meditation Bring Me? — Joy, focus, fearlessness, and the spiritual dimension.
+        </a>
+      </li>
+      <li>
+        <a href="#chapters">
+          <span class="ch-num">Chapter 03</span>
+          Where Does Yoga Fit into All of This? — Decoding yoga, chakras, and pranayama.
+        </a>
+      </li>
+      <li>
+        <a href="#chapters">
+          <span class="ch-num">Chapter 04</span>
+          How Should I Meditate? — A practical three-step framework you can start today.
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ── PULL QUOTE ── -->
+<div class="container" style="padding: 0 32px;">
+  <div class="pull-quote reveal">
+    <p>"There are thousands of books out there on meditation and spirituality. So why this one? Because, despite all those resources, most people still don't know where to begin or how to begin."</p>
+    <cite>— Devanshu Dalmia, from the Preface</cite>
+  </div>
+</div>
+
+<!-- ── WHY READ ── -->
+<section class="section" id="why-read">
+  <div class="container">
+    <p class="section-label reveal">Why This Book</p>
+    <h2 class="section-title reveal">Built for the analytical mind<br>that wants to believe</h2>
+    <p class="section-intro reveal">
+      Packed with structure, grounded in science, and written from lived experience —
+      this is the beginner's guide to meditation that finally makes it accessible.
+    </p>
+
+    <div class="why-grid">
+
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <!-- Wave + particle: science meets spirituality -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C96B10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M2 12 Q5 6 8 12 Q11 18 14 12 Q17 6 20 12 Q22 15 22 12"/>
+          </svg>
+        </div>
+        <h3>Science Meets Spirituality</h3>
+        <p>Starting with quantum physics and the observer effect, the book builds a bridge between analytical thinking and ancient wisdom — so your rational mind can actually believe what it's reading.</p>
+      </div>
+
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">
+          <!-- Path / compass: clear framework -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C96B10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <polygon points="12,5 14,11 20,12 14,13 12,19 10,13 4,12 10,11" fill="none" stroke="#C96B10" stroke-width="1.3"/>
+          </svg>
+        </div>
+        <h3>A Clear Framework, Not Noise</h3>
+        <p>A simple three-step meditation framework — Preparation → Turning Inward → Focused Awareness — replaces the overwhelm of too many options with a clear, practical path you can follow every day.</p>
+      </div>
+
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">
+          <!-- Mountain peaks: modern professionals -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C96B10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="2,20 9,7 14,14 17,10 22,20"/>
+            <line x1="2" y1="20" x2="22" y2="20"/>
+          </svg>
+        </div>
+        <h3>Written for Modern Professionals</h3>
+        <p>Devanshu came to meditation not as a monk but as a strategy consultant under pressure. He writes for people navigating demanding careers who quietly sense there must be a calmer way to live.</p>
+      </div>
+
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <!-- Seedling / lotus petal: zero to one -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C96B10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20V12"/>
+            <path d="M12 12 C12 12 6 10 6 4 C6 4 12 4 12 12"/>
+            <path d="M12 12 C12 12 18 10 18 4 C18 4 12 4 12 12"/>
+          </svg>
+        </div>
+        <h3>From Zero to One</h3>
+        <p>This is intentionally a starting guide — the beginner's 101 that Devanshu wishes he had when he first sat down to meditate. No advanced concepts, no overwhelming jargon. Just a solid foundation.</p>
+      </div>
+
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">
+          <!-- Sun / sunrise: everyday benefits -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C96B10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 17h18"/>
+            <path d="M12 6V3"/>
+            <path d="M5.5 8.5 L3.5 6.5"/>
+            <path d="M18.5 8.5 L20.5 6.5"/>
+            <path d="M3 13a9 9 0 0 1 18 0"/>
+          </svg>
+        </div>
+        <h3>Tangible, Everyday Benefits</h3>
+        <p>Beyond the spiritual, the book covers measurable practical benefits: becoming more joyful, developing sharper focus, cultivating fearlessness, and understanding how meditation supports manifestation.</p>
+      </div>
+
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">
+          <!-- Hands / namaste: fellow seeker -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C96B10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2 L12 14"/>
+            <path d="M8 6 C8 6 5 7 5 10 L5 17 C5 19 7 21 9 21 L15 21 C17 21 19 19 19 17 L19 10 C19 7 16 6 16 6"/>
+            <path d="M9 10 L9 6 C9 4.9 9.9 4 11 4 L13 4 C14.1 4 15 4.9 15 6 L15 10"/>
+          </svg>
+        </div>
+        <h3>A Fellow Seeker, Not a Guru</h3>
+        <p>Devanshu is refreshingly honest — he's not enlightened and doesn't claim to be. He's someone who hit a wall, turned inward, and built a practice that transformed his life. That honesty is the book's greatest strength.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CHAPTERS ── -->
+<section class="section section-alt" id="chapters">
+  <div class="container">
+    <div class="chapters-header">
+      <p class="section-label reveal">Inside the Book</p>
+      <h2 class="section-title reveal">Four questions.<br>One clear path forward.</h2>
+      <p class="section-intro reveal">
+        The book is structured around the four questions Devanshu was trying to answer when he
+        first set out to understand meditation — each section builds on the last, taking you from
+        "why?" all the way to "how?"
+      </p>
+    </div>
+
+    <div class="chapter-list">
+
+      <div class="chapter-item reveal">
+        <div class="chapter-num">01</div>
+        <div class="chapter-body">
+          <p class="chapter-tag">Chapter One</p>
+          <h3 class="chapter-title">Why Should I Meditate?</h3>
+          <p class="chapter-desc">
+            Before you can commit to a practice, you need to understand what you're actually doing when you close your eyes. This chapter demystifies the ultimate goal of meditation. Starting with a gentle introduction to quantum physics — wave–particle duality and the observer effect — it explores the human body through a spiritual lens via the five energy sheaths (Koshas), and finally arrives at the deepest purpose of meditation: recognising your true nature as pure awareness.
+          </p>
+          <div class="chapter-topics">
+            <span class="topic-tag">Quantum Physics</span>
+            <span class="topic-tag">The Observer Effect</span>
+            <span class="topic-tag">The Five Koshas</span>
+            <span class="topic-tag">Consciousness</span>
+            <span class="topic-tag">Your True Self</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item reveal">
+        <div class="chapter-num">02</div>
+        <div class="chapter-body">
+          <p class="chapter-tag">Chapter Two</p>
+          <h3 class="chapter-title">What Benefits Will Meditation Bring Me?</h3>
+          <p class="chapter-desc">
+            Once you understand the why, the rational mind wants proof. This chapter explores meditation's benefits through two lenses: the transformational everyday impact — greater joy, sharper focus, cultivating fearlessness, and the ability to manifest — and the deeper spiritual perspective. The everyday benefits alone, Devanshu argues, are powerful enough to justify the practice. The spiritual dimension is the gift that comes with time.
+          </p>
+          <div class="chapter-topics">
+            <span class="topic-tag">Joy & Wellbeing</span>
+            <span class="topic-tag">Focus & Clarity</span>
+            <span class="topic-tag">Fearlessness</span>
+            <span class="topic-tag">Manifestation</span>
+            <span class="topic-tag">Spiritual Growth</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item reveal">
+        <div class="chapter-num">03</div>
+        <div class="chapter-body">
+          <p class="chapter-tag">Chapter Three</p>
+          <h3 class="chapter-title">Where Does Yoga Fit into All of This?</h3>
+          <p class="chapter-desc">
+            "Yoga" has become synonymous with physical exercise — but its deeper essence is almost entirely about the path to meditation. This chapter reclaims that original meaning, explaining yoga's eight-limbed path (Ashtanga Yoga) and showing how the chakras, pranayama, and energy channels (nadis) are practical tools for preparing the mind and body to meditate effectively. It decodes the jargon so the "how" chapter actually makes sense.
+          </p>
+          <div class="chapter-topics">
+            <span class="topic-tag">Ashtanga Yoga</span>
+            <span class="topic-tag">Chakras</span>
+            <span class="topic-tag">Pranayama</span>
+            <span class="topic-tag">Nadis</span>
+            <span class="topic-tag">Yogic Philosophy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item reveal">
+        <div class="chapter-num">04</div>
+        <div class="chapter-body">
+          <p class="chapter-tag">Chapter Four</p>
+          <h3 class="chapter-title">How Should I Meditate?</h3>
+          <p class="chapter-desc">
+            With the why, what, and context in place, this chapter teaches you the how. Devanshu presents a practical three-step meditation framework: (1) Preparation — postures and breathwork; (2) Turning Inward — body scan, gratitude, and the Hamsa breath; and (3) Focused Awareness — resting attention on breath, mantra, energy centres, or sound until the mind becomes still. The chapter also covers how long to meditate, the best time of day, and how to build a sustainable daily practice.
+          </p>
+          <div class="chapter-topics">
+            <span class="topic-tag">3-Step Framework</span>
+            <span class="topic-tag">Breathwork</span>
+            <span class="topic-tag">Body Scan</span>
+            <span class="topic-tag">Mantra</span>
+            <span class="topic-tag">Focused Awareness</span>
+            <span class="topic-tag">Daily Practice</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── AUTHOR ── -->
+<section class="section" id="about">
+  <div class="container">
+    <p class="section-label reveal">The Author</p>
+    <h2 class="section-title reveal">Hi, I'm Devanshu Dalmia</h2>
+
+    <div class="author-grid">
+      <div class="author-photo-wrap reveal">
+        <img src="Devanshu Image.jpeg" alt="Devanshu Dalmia — Author" class="author-photo">
+        <div class="author-photo-badge">
+          "This is the guide I wish I had when I first sat down to begin."
+        </div>
+      </div>
+
+      <div class="author-content reveal reveal-delay-1">
+        <h3 class="author-name">Devanshu Dalmia</h3>
+        <p class="author-role">Commercial & Strategy Professional · First-Time Author · Meditation Practitioner</p>
+
+        <div class="author-bio">
+          <p>
+            I'm a commercial and strategy professional with over a decade of experience in high-pressure corporate environments. I hold an MBA from London Business School and an engineering degree from Nanyang Technological University in Singapore. Based in Amsterdam, I've lived and worked in seven countries.
+          </p>
+          <p>
+            My journey with meditation began in 2020 — during a period when I couldn't sleep, my body was falling apart, and I was navigating a struggling family business at the height of COVID-19. I was twenty-eight but felt sixty. A performance coach led me through a guided meditation that brought a deep sense of calm, and that single session changed the course of my life.
+          </p>
+          <p>
+            From there I started reading, attending retreats, visiting ashrams. Slowly, something began to shift. Today, meditation is my daily anchor — the thing that helps me stay clear-headed, focused, and grounded amid the demands of a fast-moving corporate career.
+          </p>
+          <p>
+            I wrote this book because I needed it and couldn't find it. It's the beginner's guide I wish had existed when I first asked, <em>"I want to meditate — but where do I begin?"</em>
+          </p>
+        </div>
+
+        <div class="author-highlights">
+          <div class="highlight-item"><div class="highlight-dot"></div><span class="highlight-text">MBA, London Business School</span></div>
+          <div class="highlight-item"><div class="highlight-dot"></div><span class="highlight-text">Engineering, NTU Singapore</span></div>
+          <div class="highlight-item"><div class="highlight-dot"></div><span class="highlight-text">Based in Amsterdam</span></div>
+          <div class="highlight-item"><div class="highlight-dot"></div><span class="highlight-text">Lived & worked in 7 countries</span></div>
+          <div class="highlight-item"><div class="highlight-dot"></div><span class="highlight-text">Daily meditator since 2020</span></div>
+          <div class="highlight-item"><div class="highlight-dot"></div><span class="highlight-text">Strategy & commercial advisor</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="section section-alt" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="contact-left">
+        <p class="section-label reveal">Get in Touch</p>
+        <h2 class="section-title reveal">Start your meditation journey today</h2>
+        <p class="reveal">
+          Whether you'd like to order the book, have a question about the content, or simply want to connect — Devanshu would love to hear from you.
+        </p>
+        <p class="reveal">
+          He writes from lived experience, not from a pedestal, and is always happy to hear from fellow seekers who are curious about where to begin.
+        </p>
+
+        <div class="contact-detail reveal">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:devanshudalmia@gmail.com">devanshudalmia@gmail.com</a>
+        </div>
+
+        <div class="contact-detail reveal">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Amsterdam, Netherlands</span>
+        </div>
+      </div>
+
+      <div class="form-card reveal">
+        <h3 class="form-title">Send a message</h3>
+        <form action="https://formsubmit.co/devanshudalmia@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Website Enquiry — I Want to Meditate">
+          <input type="hidden" name="_captcha" value="false">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="first_name" placeholder="Your first name" required>
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="last_name" placeholder="Your last name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">I'm reaching out about…</label>
+            <select id="subject" name="subject">
+              <option value="book-order">Ordering the book</option>
+              <option value="speaking">Speaking / Events</option>
+              <option value="media">Media / Press</option>
+              <option value="feedback">Feedback on the book</option>
+              <option value="other">Something else</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell Devanshu what's on your mind…" required></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Send Message →</button>
+          <p class="form-note">Your message will be sent directly to Devanshu's inbox.</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Devanshu Dalmia</div>
+    <ul class="footer-links">
+      <li><a href="#why-read">Why Read</a></li>
+      <li><a href="#chapters">Chapters</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Devanshu Dalmia. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+    document.getElementById('progress-bar').style.width = (scrolled * 100) + '%';
+  });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+  revealEls.forEach(el => io.observe(el));
+
+  // Immediately reveal hero items
+  document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+</script>
+</body>
+</html>

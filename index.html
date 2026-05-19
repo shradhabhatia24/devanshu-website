@@ -453,6 +453,22 @@
       transition: background 0.2s, transform 0.15s;
     }
     .btn-cta-light:hover { background: #A8560C; transform: translateY(-2px); }
+    .cta-buttons {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-cta-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: rgba(255,255,255,0.85);
+      padding: 15px 32px; border-radius: var(--radius);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      font-weight: 600; font-size: 1rem; text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-cta-outline:hover {
+      border-color: rgba(255,255,255,0.7); color: var(--white);
+      transform: translateY(-2px);
+    }
     .cta-note {
       margin-top: 16px; font-size: 0.8rem;
       color: rgba(255,255,255,0.4);
@@ -499,7 +515,7 @@
       <li><a href="#chapters">Chapters</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Get in Touch</a></li>
-      <li><a href="https://www.amazon.com/dp/B0GXHHXH7N" target="_blank" rel="noopener" class="nav-cta">Get the Book</a></li>
+      <li><a href="https://mybook.to/LnoAvzK" target="_blank" rel="noopener" class="nav-cta">Get the Book</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
@@ -511,7 +527,7 @@
       <li><a href="#chapters" class="mobile-link">Chapters</a></li>
       <li><a href="#about" class="mobile-link">About</a></li>
       <li><a href="#contact" class="mobile-link">Get in Touch</a></li>
-      <li><a href="https://www.amazon.com/dp/B0GXHHXH7N" target="_blank" rel="noopener" class="mobile-link">Get the Book</a></li>
+      <li><a href="https://mybook.to/LnoAvzK" target="_blank" rel="noopener" class="mobile-link">Get the Book</a></li>
     </ul>
   </div>
 </nav>
@@ -541,7 +557,8 @@
     They avoid it because they don't know where to begin. This book changes that.
   </p>
   <div class="hero-actions reveal reveal-delay-3">
-    <a href="https://www.amazon.com/dp/B0GXHHXH7N" target="_blank" rel="noopener" class="btn-primary">Get the Book</a>
+    <a href="https://mybook.to/LnoAvzK" target="_blank" rel="noopener" class="btn-primary">Get the Book</a>
+    <a href="https://www.amazon.in/Want-MEDITATE-but-Where-Begin/dp/9083679608/ref=sr_1_2?dib=eyJ2IjoiMSJ9.vboFsxXFkJFW-omhfiWisc2i8cTL6WeRea3yIJnmSCU.22zbyEEyorNXUMvb8T5oWUC16rrNao4PCXGYzuV1c-8&dib_tag=se&geniuslink=true&keywords=Devanshu+Dalmia+i+want+to+meditate+but+where+do+i+begin+a+clear+framework+from+a+fellow+seeker&nsdOptOutParam=true&qid=1779183485&sr=8-2" target="_blank" rel="noopener" class="btn-secondary">Buy on Amazon India 🇮🇳</a>
     <a href="#chapters" class="btn-secondary">Explore the Chapters</a>
   </div>
 </section>
@@ -867,10 +884,15 @@
       Available now on Amazon as a Kindle ebook and paperback.
       Start with a few pages and see what shifts.
     </p>
-    <a href="https://www.amazon.com/dp/B0GXHHXH7N" target="_blank" rel="noopener" class="btn-cta-light reveal">
-      Get the Book on Amazon
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
+    <div class="cta-buttons reveal">
+      <a href="https://mybook.to/LnoAvzK" target="_blank" rel="noopener" class="btn-cta-light">
+        Get the Book on Amazon
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://www.amazon.in/Want-MEDITATE-but-Where-Begin/dp/9083679608/ref=sr_1_2?dib=eyJ2IjoiMSJ9.vboFsxXFkJFW-omhfiWisc2i8cTL6WeRea3yIJnmSCU.22zbyEEyorNXUMvb8T5oWUC16rrNao4PCXGYzuV1c-8&dib_tag=se&geniuslink=true&keywords=Devanshu+Dalmia+i+want+to+meditate+but+where+do+i+begin+a+clear+framework+from+a+fellow+seeker&nsdOptOutParam=true&qid=1779183485&sr=8-2" target="_blank" rel="noopener" class="btn-cta-outline">
+        Buy on Amazon India 🇮🇳
+      </a>
+    </div>
     <p class="cta-note reveal">Available in Kindle &amp; Paperback</p>
   </div>
 </section>

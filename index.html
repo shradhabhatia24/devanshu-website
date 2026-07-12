@@ -394,6 +394,63 @@
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
 
+    /* ── PODCAST ── */
+    .podcast-section {
+      padding: 56px 32px; background: var(--orange-lt);
+    }
+    .podcast-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: grid; grid-template-columns: 340px 1fr;
+      gap: 52px; align-items: center;
+    }
+    .podcast-image-wrap {
+      position: relative; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 12px 36px rgba(30,18,9,0.20);
+    }
+    .podcast-image-wrap img {
+      width: 100%; display: block;
+    }
+    .podcast-content { }
+    .podcast-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 14px;
+    }
+    .podcast-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 700;
+      color: var(--dark); line-height: 1.3; margin-bottom: 8px;
+    }
+    .podcast-show {
+      font-size: 0.88rem; color: var(--orange); font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .podcast-meta {
+      display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px;
+    }
+    .podcast-meta-item {
+      font-size: 0.82rem; color: var(--muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .podcast-meta-item svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .podcast-desc {
+      font-size: 0.95rem; color: var(--muted); line-height: 1.82;
+      margin-bottom: 32px;
+    }
+    .btn-spotify {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #1DB954; color: #fff;
+      padding: 13px 28px; border-radius: 100px;
+      font-weight: 700; font-size: 0.92rem; text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-spotify:hover { background: #17a349; transform: translateY(-1px); }
+    .btn-spotify svg { width: 20px; height: 20px; flex-shrink: 0; }
+    @media (max-width: 860px) {
+      .podcast-inner { grid-template-columns: 1fr; gap: 36px; }
+      .podcast-image-wrap { max-width: 420px; }
+    }
+
     /* ── REVIEWS ── */
     .reviews-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
@@ -514,6 +571,7 @@
       <li><a href="#why-read">Why Read</a></li>
       <li><a href="#chapters">Chapters</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#podcast">Podcast</a></li>
       <li><a href="#contact">Get in Touch</a></li>
       <li><a href="https://mybook.to/LnoAvzK" target="_blank" rel="noopener" class="nav-cta">Get the Book</a></li>
     </ul>
@@ -526,6 +584,7 @@
       <li><a href="#why-read" class="mobile-link">Why Read</a></li>
       <li><a href="#chapters" class="mobile-link">Chapters</a></li>
       <li><a href="#about" class="mobile-link">About</a></li>
+      <li><a href="#podcast" class="mobile-link">Podcast</a></li>
       <li><a href="#contact" class="mobile-link">Get in Touch</a></li>
       <li><a href="https://mybook.to/LnoAvzK" target="_blank" rel="noopener" class="mobile-link">Get the Book</a></li>
       <li><a href="https://www.amazon.in/Want-MEDITATE-but-Where-Begin/dp/9083679608/ref=sr_1_2?dib=eyJ2IjoiMSJ9.vboFsxXFkJFW-omhfiWisc2i8cTL6WeRea3yIJnmSCU.22zbyEEyorNXUMvb8T5oWUC16rrNao4PCXGYzuV1c-8&dib_tag=se&geniuslink=true&keywords=Devanshu+Dalmia+i+want+to+meditate+but+where+do+i+begin+a+clear+framework+from+a+fellow+seeker&nsdOptOutParam=true&qid=1779183485&sr=8-2" target="_blank" rel="noopener" class="mobile-link">Get the Book in India 🇮🇳</a></li>
@@ -615,6 +674,45 @@
     </ul>
   </div>
 </div>
+
+<!-- ── PODCAST (under intro) ── -->
+<section class="podcast-section" id="podcast">
+  <div class="podcast-inner">
+
+    <div class="podcast-image-wrap reveal">
+      <img src="Devanshu Podcast.jpeg" alt="Meditation for the Analytical Mind — The Midlife Crisis Podcast with Devanshu Dalmia">
+    </div>
+
+    <div class="podcast-content reveal reveal-delay-1">
+      <p class="podcast-label">As Heard On</p>
+      <h2 class="podcast-title">Meditation for the Analytical Mind — Focus, Fear &amp; Stillness</h2>
+      <p class="podcast-show">The Midlife Crisis Podcast &nbsp;·&nbsp; Season 2, Episode 4</p>
+
+      <div class="podcast-meta">
+        <span class="podcast-meta-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,6 12,12 16,14"/></svg>
+          48 minutes
+        </span>
+        <span class="podcast-meta-item">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Host: Diederik Erbe
+        </span>
+      </div>
+
+      <p class="podcast-desc">
+        In this episode, Devanshu joins Diederik Erbe on The Midlife Crisis Podcast to talk about how he came to meditation as a strategy professional — not as a spiritual seeker — and why the analytical mind is both the biggest obstacle and the biggest asset on the path to stillness. They explore the science behind meditation, the practical framework from his book, and why starting is always the hardest part.
+      </p>
+
+      <a href="https://open.spotify.com/episode/7pI5QUZKWZMcqn6XCW1Bc1?si=Gyc-6pUUTpK1-Jf3dUyNIA&utm_source=copy-link" target="_blank" rel="noopener" class="btn-spotify">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.371-.721.49-1.101.241-3.021-1.858-6.832-2.278-11.322-1.237-.422.1-.851-.16-.949-.583-.1-.422.16-.851.583-.949 4.91-1.121 9.12-.64 12.521 1.43.38.24.49.721.268 1.098zm1.47-3.27c-.301.459-.921.6-1.381.3-3.459-2.13-8.729-2.748-12.82-1.501-.519.16-1.059-.14-1.219-.659-.161-.52.14-1.061.659-1.221 4.671-1.42 10.48-.731 14.461 1.71.459.301.599.921.3 1.371zm.129-3.401c-4.15-2.461-10.999-2.691-14.96-1.489-.64.19-1.311-.169-1.5-.809-.189-.641.17-1.311.811-1.501 4.55-1.38 12.12-1.111 16.89 1.721.571.34.761 1.07.421 1.64-.34.571-1.07.762-1.662.438z"/>
+        </svg>
+        Listen on Spotify
+      </a>
+    </div>
+
+  </div>
+</section>
 
 <hr class="divider">
 
